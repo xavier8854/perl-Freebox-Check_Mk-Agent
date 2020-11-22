@@ -1,0 +1,24 @@
+#Fichiers temporaires
+*~
+*.swp
+.directory
+#Fichier python compilés
+*.pyc
+*.pyo
+#Répertoire rpms de hn-compil (inutile, vous pouvez le supprimer)
+rpms
+#Répertoire tgz (voir la partie sur la gestion des binaires dans la doc)
+tgz
+#Fichiers d'archive (voir la partie sur la gestion des binaires dans la doc)
+*.zip
+*.tar
+*.gz
+*.bz2
+*.gzip
+*.xz
+# Répertoire Attic
+Attic
+IGNORE
+/Attic/
+bytes_*
+Freebox.ini
