@@ -66,7 +66,7 @@ my $hashResponse;
 my %jsonRequest;
 my $systemConfig ;
 
-my $app_token = "foo";
+my $app_token = "";
 my $track_id = 0;
 
 #####
@@ -86,23 +86,30 @@ my $device_name = "numenor";
 #################################################################################################
 
 #~ my ($app_token, $track_id) = $fbx->authorize($app_id, $app_name, $app_version, $device_name);
-open (INI, '>', $INIFILE) or die "Can't create $INIFILE";
-print INI "[general]\n";
-print INI "token = $app_token\n";
-print INI "id = $track_id\n";
-close (INI);
-exit (0);
+#~ open (INI, '>', $INIFILE) or die "Can't create $INIFILE";
+#~ print INI "[general]\n";
+#~ print INI "token = $app_token\n";
+#~ print INI "id = $track_id\n";
+#~ close (INI);
+#~ exit (0);
 
-open (my $INIFile, '<',$INIFILE) or die "Can't $INIFILE $!";
+######################################
+# Get the token/id pair from INI file
+######################################
+open (my $INIFile, '<',$INIFILE) or die "Can't create $INIFILE $!";
 	my $cfg = Config::IniFiles->new( -file => $INIFile );
 	$app_token = $cfg->val('general',	'token');
 	$track_id = $cfg->val('general',	'id');
 close ($INIFile);
 
+# Log in and get system config
 $fbx->login("perl.check_mk", $app_token, $track_id);
 $jsonResponse = $fbx->request("system", GET);
 $systemConfig = decode_json ($jsonResponse);
 
+######################################
+# Now, generate an agent output
+######################################
 #======================== header section ===============================
 print "<<<check_mk>>>\n";
 print "Version: $app_version\n";
@@ -262,6 +269,10 @@ print "MEM_Usage 0.000 percent ok na na na 101.000 na na\n";
 print "SYS_Usage 0.000 percent ok na na na 101.000 na na\n";
 
 #=======================================================================
+
+######################################
+# All done, close the connection
+######################################
 
 $fbx->logout();
 $fbx->close();
