@@ -24,6 +24,7 @@
 
 use strict;
 use warnings;
+use Data::Dumper;
 use Config::IniFiles;
 use JSON;
 use MIME::Base64;
@@ -169,11 +170,12 @@ print "<<<lnx_if:sep(58)>>>\n";
 my $send_bytes = 0;
 my $rcvd_bytes = 0;
 foreach my $data (@{$hashResponse->{'result'}{'data'}}) {
-	$send_bytes += $data{'rate_up'};
-	$rcvd_bytes += $data{'ratedown'};
+	print Dumper ($data);
+	#~ $send_bytes += {$data{'rate_up'}};
+	#~ $rcvd_bytes += $data{'ratedown'}};
 }
-my $send_bytes *= $resolution;
-my $rcvd_bytes *= $resolution;
+$send_bytes *= $resolution;
+$rcvd_bytes *= $resolution;
 printf "%7s: %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d\n", "wan0", $rcvd_bytes, 0, 0, 0, 0, 0, 0, $send_bytes, 0, 0, 0, 0, 0, 0, 0, 0;
 
 #--------------- Switch
