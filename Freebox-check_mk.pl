@@ -170,9 +170,9 @@ print "<<<lnx_if:sep(58)>>>\n";
 my $send_bytes = 0;
 my $rcvd_bytes = 0;
 foreach my $data (@{$hashResponse->{'result'}{'data'}}) {
-	print Dumper ($data);
-	#~ $send_bytes += {$data{'rate_up'}};
-	#~ $rcvd_bytes += $data{'ratedown'}};
+	#~ print Dumper ($data);
+	$send_bytes += $data->{'rate_up'};
+	$rcvd_bytes += $data->{'ratedown'};
 }
 $send_bytes *= $resolution;
 $rcvd_bytes *= $resolution;
