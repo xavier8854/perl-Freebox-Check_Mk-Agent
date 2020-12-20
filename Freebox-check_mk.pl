@@ -170,8 +170,8 @@ print "<<<lnx_if>>>\n";
 print "<<<lnx_if:sep(58)>>>\n";
 my $send_previous_wan = read_file($SEND_BYTES_WAN);
 my $rcvd_previous_wan = read_file($RCVD_BYTES_WAN);
-my $send_bytes = ($hashResponse->{'result'}{'data'}[0]{'rate_up'} + int($send_previous_wan)) * $resolution;
-my $rcvd_bytes = ($hashResponse->{'result'}{'data'}[0]{'rate_down'} + int ($rcvd_previous_wan)) * $resolution;
+my $send_bytes = ($hashResponse->{'result'}{'data'}[0]{'rate_up'}) * $resolution;	# + int($send_previous_wan)
+my $rcvd_bytes = ($hashResponse->{'result'}{'data'}[0]{'rate_down'} ) * $resolution;	#+ int ($rcvd_previous_wan)
 write_file($SEND_BYTES_WAN, sprintf ("%d", $send_bytes));
 write_file($RCVD_BYTES_WAN, sprintf ("%d", $rcvd_bytes));
 printf "%7s: %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d\n", "wan0", $rcvd_bytes, 0, 0, 0, 0, 0, 0, $send_bytes, 0, 0, 0, 0, 0, 0, 0, 0;
