@@ -166,8 +166,14 @@ my $resolution = $hashResponse->{'result'}{'date_end'}  -  $hashResponse->{'resu
 my $wan_speed = $hashResponse->{'result'}{'data'}[0]{'bw_down'}/1000000*8;
 print "<<<lnx_if>>>\n";
 print "<<<lnx_if:sep(58)>>>\n";
-my $send_bytes = ($hashResponse->{'result'}{'data'}[0]{'rate_up'}) * $resolution;
-my $rcvd_bytes = ($hashResponse->{'result'}{'data'}[0]{'rate_down'} ) * $resolution;
+my $send_bytes = 0;
+my $rcvd_bytes = 0;
+foreach my $data (@{$hashResponse->{'result'}{'data'}}) {
+	$send_bytes += $data{'rate_up'};
+	$rcvd_bytes += $data{'ratedown'};
+}
+my $send_bytes *= $resolution;
+my $rcvd_bytes *= $resolution;
 printf "%7s: %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d\n", "wan0", $rcvd_bytes, 0, 0, 0, 0, 0, 0, $send_bytes, 0, 0, 0, 0, 0, 0, 0, 0;
 
 #--------------- Switch
