@@ -96,7 +96,7 @@ my $device_name = "numenor";
 ######################################
 # Get the token/id pair from INI file
 ######################################
-open (my $INIFile, '<',$INIFILE) or die "Can't create $INIFILE $!";
+open (my $INIFile, '<',$INIFILE) or die "Can't open $INIFILE $!";
 	my $cfg = Config::IniFiles->new( -file => $INIFile );
 	$app_token = $cfg->val('general',	'token');
 	$track_id = $cfg->val('general',	'id');
@@ -164,13 +164,14 @@ my $dateStart = time();
 );
 $jsonResponse = $fbx->request("rrd", POST, JSON->new->ascii->pretty->encode(\%jsonRequest));
 $hashResponse = decode_json ($jsonResponse);
+my $resolution = $hashResponse->{'result'}{'date_end'}  -  $hashResponse->{'result'}{'date_start'};
 my $wan_speed = $hashResponse->{'result'}{'data'}[0]{'bw_down'}/1000000*8;
 print "<<<lnx_if>>>\n";
 print "<<<lnx_if:sep(58)>>>\n";
 my $send_previous_wan = read_file($SEND_BYTES_WAN);
 my $rcvd_previous_wan = read_file($RCVD_BYTES_WAN);
-my $send_bytes = $hashResponse->{'result'}{'data'}[0]{'rate_up'} + int($send_previous_wan);
-my $rcvd_bytes = $hashResponse->{'result'}{'data'}[0]{'rate_down'} + int ($rcvd_previous_wan);
+my $send_bytes = ($hashResponse->{'result'}{'data'}[0]{'rate_up'} + int($send_previous_wan)) * $resolution;
+my $rcvd_bytes = ($hashResponse->{'result'}{'data'}[0]{'rate_down'} + int ($rcvd_previous_wan)) * $resolution;
 write_file($SEND_BYTES_WAN, sprintf ("%d", $send_bytes));
 write_file($RCVD_BYTES_WAN, sprintf ("%d", $rcvd_bytes));
 printf "%7s: %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d %4d\n", "wan0", $rcvd_bytes, 0, 0, 0, 0, 0, 0, $send_bytes, 0, 0, 0, 0, 0, 0, 0, 0;
