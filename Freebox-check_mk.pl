@@ -175,10 +175,11 @@ my $rcvd_previous_wan = read_file($RCVD_BYTES_WAN);
 my $send_bytes = 0;
 my $rcvd_bytes = 0;
 foreach my $data (@{$hashResponse->{'result'}{'data'}}) {
-	#~ print Dumper ($data);
 	$send_bytes += $data->{'rate_up'};
 	$rcvd_bytes += $data->{'rate_down'};
 }
+$send_bytes *= $resolution;
+$rcvd_bytes *= $resolution;
 $send_bytes += $send_previous_wan;
 $rcvd_bytes += $rcvd_previous_wan;
 write_file($SEND_BYTES_WAN, $send_bytes);
