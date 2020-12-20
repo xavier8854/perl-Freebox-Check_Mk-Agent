@@ -172,7 +172,7 @@ my $rcvd_bytes = 0;
 foreach my $data (@{$hashResponse->{'result'}{'data'}}) {
 	#~ print Dumper ($data);
 	$send_bytes += $data->{'rate_up'};
-	$rcvd_bytes += $data->{'ratedown'};
+	$rcvd_bytes += $data->{'rate_down'};
 }
 $send_bytes *= $resolution;
 $rcvd_bytes *= $resolution;
