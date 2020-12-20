@@ -43,7 +43,7 @@ sub write_file($$);	# filename, data
 #####
 ## CONSTANTS
 #####
-our $VERSION = "1.0b1";
+our $VERSION = "1.0b5";
 
 use constant GET => 0;
 use constant POST => 1;
