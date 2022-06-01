@@ -1,6 +1,6 @@
 # perl-Freebox-Check_Mk-Agent
 
-##[ENGLISH]
+## [ENGLISH]
 
 Check_mk like agent for probing a Freebox from check_mk
 
@@ -17,7 +17,7 @@ Tested on Linux, FreeBSD and MacOSX.
 * Configure xinetd as below to listen on the port 6556 (or another, if you already monitoring your computer, in this case, you have to tell check_mk which port to contact).
 * Run an inventory from your nagios/check_mk host
 
-##[FRANÇAIS]
+## [FRANÇAIS]
 
 Agent similaire à check_mk permettant de superviser une Freebox depuis check_mk.
 
