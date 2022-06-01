@@ -37,14 +37,14 @@ Testé sur Linux, FreeBSD et MacOSX
 
 ```
 service check_mk-freebox {
-   type           = UNLISTED
+	type           = UNLISTED
 	port           = 6556
 	socket_type    = stream
 	protocol       = tcp
 	wait           = no
 	user           = root
 	server         = /your/directory/Freebox-check_mk.pl
-   flags          = IPv6
+	flags          = IPv6
 	#configure the IP address(es) of your Nagios server here:
 	only_from      = ::1 127.0.0.1 10.11.12.13
 	log_on_success =
