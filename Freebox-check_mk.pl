@@ -82,7 +82,7 @@ my $app_version = "$VERSION-fbx";
 my $device_name = "numenor";
 
 #################################################################################################
-# IMPORTANT !!!																					#
+#							 IMPORTANT !!!														#
 # To get an app token, uncomment this and run it once, accepting it on yout Freebox front panel	#
 #################################################################################################
 
