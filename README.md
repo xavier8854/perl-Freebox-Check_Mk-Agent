@@ -29,7 +29,7 @@ Testé sur Linux, FreeBSD et MacOSX
 * Un ordinateur dans votre LAN, ayant accès à la Freebox sur le port 443.
 
 ## Usage
-* Installez le script dans un répeertoire de votre choix sur un ordinateur de votre LAN.
+* Installez le script dans un répertoire de votre choix sur un ordinateur de votre LAN.
 * Veuillez-bien lire la section **IMPORTANT** dans le code, et exécutez les morceaux de code indiqués pour autoriser l'accès à l'API de votre Freebox.
 * Configurez xinetd comme ci-dessous pour écouter sur le port 6556 (ou un autre, si vous monitorez déjà votre ordinateur auquel cas il faut indiquer le numéro de port à check_mk).
 * Lancez un inventaire sur votre serveur nagios/check_mk.
